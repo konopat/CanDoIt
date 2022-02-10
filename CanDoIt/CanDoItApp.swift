@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct CanDoItApp: App {
+    
     let persistenceController = PersistenceController.shared
+    let secretary = Secretary()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(secretary: secretary)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
