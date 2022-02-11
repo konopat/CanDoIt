@@ -1,4 +1,4 @@
 # CanDoIt
-Simple ToDo demo app based on CoreData.
+CoreData + MVVM ToDo app example
 
 I just started working on it.
