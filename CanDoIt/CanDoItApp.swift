@@ -11,11 +11,11 @@ import SwiftUI
 struct CanDoItApp: App {
     
     let persistenceController = PersistenceController.shared
-    let secretary = Secretary()
+    let secretary = ToDoListModelView()
 
     var body: some Scene {
         WindowGroup {
-            ContentView(secretary: secretary)
+            ContentView(toDoListModelView: secretary)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
