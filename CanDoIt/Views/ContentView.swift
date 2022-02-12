@@ -10,14 +10,14 @@ import CoreData
 
 struct ContentView: View {
     
-    @ObservedObject var toDoListModelView: ToDoListModelView
+    @ObservedObject var modelView: ToDoListModelView
     @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
         
         NavigationView {
             List {
-                ForEach(toDoListModelView.tasks) { task in
+                ForEach(modelView.tasks) { task in
                     NavigationLink {
                         Text("There will be an editing View")
                     } label: {
@@ -46,20 +46,21 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.large)
         }
         .onAppear(perform: loadItems)
+        .navigationViewStyle(StackNavigationViewStyle()) // Fix problem with constraint warning
     }
     private func addNewTask(_ title: String) {
-        toDoListModelView.addTask(title)
+        modelView.addTask(title)
     }
     private func deleteItems(offsets: IndexSet) {
-        toDoListModelView.deleteTask(offsets: offsets)
+        modelView.deleteTask(offsets: offsets)
     }
     private func loadItems() {
-        toDoListModelView.getTasks()
+        modelView.getTasks()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(toDoListModelView: ToDoListModelView())
+        ContentView(modelView: ToDoListModelView())
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6F2650F627B65F0000CA407B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2650F527B65F0000CA407B /* Constants.swift */; };
 		6F2650F827B667AB00CA407B /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2650F727B667AB00CA407B /* TaskRowView.swift */; };
+		6F6DADAA27B78BD30096F984 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6F6DADA927B78BD30096F984 /* .gitignore */; };
 		6FB3ECF427B3B98600D9A0A6 /* CanDoItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3ECF327B3B98600D9A0A6 /* CanDoItApp.swift */; };
 		6FB3ECF627B3B98600D9A0A6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3ECF527B3B98600D9A0A6 /* ContentView.swift */; };
 		6FB3ECF827B3B98700D9A0A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB3ECF727B3B98700D9A0A6 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		6F2650F527B65F0000CA407B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6F2650F727B667AB00CA407B /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		6F6DADA927B78BD30096F984 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		6FB3ECF027B3B98600D9A0A6 /* CanDoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanDoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB3ECF327B3B98600D9A0A6 /* CanDoItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanDoItApp.swift; sourceTree = "<group>"; };
 		6FB3ECF527B3B98600D9A0A6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				6FA171CE27B66DC100519E56 /* ModelView */,
 				6F2650F527B65F0000CA407B /* Constants.swift */,
 				6FB3ECFC27B3B98700D9A0A6 /* Persistence.swift */,
+				6F6DADA927B78BD30096F984 /* .gitignore */,
 				6FB3ECF727B3B98700D9A0A6 /* Assets.xcassets */,
 				6FB3ECF927B3B98700D9A0A6 /* Preview Content */,
 			);
@@ -165,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FB3ECFB27B3B98700D9A0A6 /* Preview Assets.xcassets in Resources */,
+				6F6DADAA27B78BD30096F984 /* .gitignore in Resources */,
 				6FB3ECF827B3B98700D9A0A6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
