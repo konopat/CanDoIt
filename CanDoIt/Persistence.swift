@@ -11,12 +11,9 @@ struct PersistenceController {
     
     static let shared = PersistenceController()
     
-    static var preview: PersistenceController = {
+    static var preview: PersistenceController = {        
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Task(context: viewContext)
-        }
         do {
             try viewContext.save()
         } catch {
@@ -42,4 +39,3 @@ struct PersistenceController {
         
     }
 }
-

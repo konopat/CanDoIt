@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TaskRowView: View {
     let task: Task
@@ -24,7 +25,21 @@ struct TaskRowView: View {
 }
 
 struct TaskRowView_Previews: PreviewProvider {
+    
+    static let persistence = PersistenceController.preview
+    
+    static var testTask: Task = {
+        let context = persistence.container.viewContext
+        let testTask = Task(context: context)
+        testTask.id = UUID()
+        testTask.isDone = false
+        testTask.title = "Тестовая задача"
+        testTask.timestamp = Date()
+        return testTask
+    }()
+    
     static var previews: some View {
-        TaskRowView(task: Task()) // Need preview example
+        TaskRowView(task: testTask)
+            .environment(\.managedObjectContext, persistence.container.viewContext)
     }
 }
