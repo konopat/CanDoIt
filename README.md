@@ -1,4 +1,4 @@
 # CanDoIt
-CoreData + MVVM ToDo app example
+SwiftUI CoreData MVVM ToDo app example
 
 I just started working on it.
