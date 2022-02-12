@@ -11,7 +11,6 @@ import CoreData
 struct ContentView: View {
     
     @ObservedObject var modelView: ToDoListModelView
-    @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
         
