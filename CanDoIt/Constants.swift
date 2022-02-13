@@ -9,7 +9,7 @@ import Foundation
 
 struct K {
     static let entityName = "Task"
-    static let persistentContainerName = "CanDoIt"
+    static let persistentContainerName = "DataModel"
     
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

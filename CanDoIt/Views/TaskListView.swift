@@ -8,19 +8,19 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct TaskListView: View {
     
-    @ObservedObject var modelView: ToDoListModelView
+    @ObservedObject var viewModel: TaskListViewModel
 
     var body: some View {
         
         NavigationView {
             List {
-                ForEach(modelView.tasks) { task in
+                ForEach(viewModel.tasks) { task in
                     NavigationLink {
                         Text("There will be an editing View")
                     } label: {
-                        TaskRowView(task: task)
+                        TaskListRowView(task: task)
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -48,18 +48,18 @@ struct ContentView: View {
         .navigationViewStyle(StackNavigationViewStyle()) // Fix problem with constraint warning
     }
     private func addNewTask(_ title: String) {
-        modelView.addTask(title)
+        viewModel.addNewItem(with: title)
     }
     private func deleteItems(offsets: IndexSet) {
-        modelView.deleteTask(offsets: offsets)
+        viewModel.deleteItems(by: offsets)
     }
     private func loadItems() {
-        modelView.getTasks()
+        viewModel.loadData()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(modelView: ToDoListModelView())
+        TaskListView(viewModel: TaskListViewModel())
     }
 }

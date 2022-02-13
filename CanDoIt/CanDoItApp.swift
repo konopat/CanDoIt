@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct CanDoItApp: App {
     
-    let modelView = ToDoListModelView()
+    let currentViewModel = TaskListViewModel()
 
     var body: some Scene {
         WindowGroup {
-            ContentView(modelView: modelView)
+            TaskListView(viewModel: currentViewModel)
         }
     }
 }

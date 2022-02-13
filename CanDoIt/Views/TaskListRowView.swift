@@ -1,5 +1,5 @@
 //
-//  TaskRowView.swift
+//  TaskListRowView.swift
 //  CanDoIt
 //
 //  Created by Роман Предеин on 11.02.2022.
@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct TaskRowView: View {
+struct TaskListRowView: View {
     let task: Task
     var body: some View {
         if let timestamp = task.timestamp, let taskTitle = task.title {
@@ -26,7 +26,7 @@ struct TaskRowView: View {
 
 struct TaskRowView_Previews: PreviewProvider {
     
-    static let persistence = PersistenceController.preview
+    static let persistence = PersistenceController()
     
     static var testTask: Task = {
         let context = persistence.container.viewContext
@@ -39,7 +39,7 @@ struct TaskRowView_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        TaskRowView(task: testTask)
+        TaskListRowView(task: testTask)
             .environment(\.managedObjectContext, persistence.container.viewContext)
     }
 }
