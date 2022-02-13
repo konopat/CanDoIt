@@ -18,6 +18,7 @@ struct TaskListRowView: View {
                 Text("\(timestamp, formatter: K.dateFormatter)")
                     .font(.caption)
             }
+            .padding(.vertical)
         } else {
             Text("Invalid task")
         }
