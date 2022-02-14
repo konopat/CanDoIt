@@ -85,7 +85,19 @@ class TaskListViewModel: ObservableObject {
     
     // Reorder
     func move(from source: IndexSet, to destination: Int) {
-        tasks.move(fromOffsets: source, toOffset: destination)
+        
+        // https://stackoverflow.com/questions/59742218/swiftui-reorder-coredata-objects-in-list
+        
+//        tasks.move(fromOffsets: source, toOffset: destination)
+        
+//        for reverseIndex in stride( from: tasks.count - 1,
+//                                        through: 0,
+//                                        by: -1 )
+//        {
+//            tasks[ reverseIndex ].order =
+//                Int64( reverseIndex )
+//        }
+        
         saveData()
     }
 
