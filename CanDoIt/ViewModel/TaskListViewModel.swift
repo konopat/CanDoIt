@@ -26,6 +26,8 @@ class TaskListViewModel: ObservableObject {
         
         // Request objects that match our model
         let request = NSFetchRequest<EntityModel>(entityName: K.entityName)
+        let sort = NSSortDescriptor(key: "order", ascending: false)
+        request.sortDescriptors = [sort]
         
         do {
             // Try to load the result into the monitored array
@@ -55,7 +57,7 @@ class TaskListViewModel: ObservableObject {
     }
 
     // New data
-    func addNewItem(with title: String) {
+    func addNewItem(with title: String, and order: Int) {
         
         // Initializing the creation of a new entity
         let newItem = EntityModel(context: persistenceController.container.viewContext)
@@ -65,6 +67,7 @@ class TaskListViewModel: ObservableObject {
         newItem.isDone = false
         newItem.title = title
         newItem.timestamp = Date()
+        newItem.order = Int64(order)
         
         // And start saving
         saveData()
@@ -77,6 +80,12 @@ class TaskListViewModel: ObservableObject {
         offsets.map { tasks[$0] }.forEach(persistenceController.container.viewContext.delete)
         
         // And start saving certainly
+        saveData()
+    }
+    
+    // Reorder
+    func move(from source: IndexSet, to destination: Int) {
+        tasks.move(fromOffsets: source, toOffset: destination)
         saveData()
     }
 

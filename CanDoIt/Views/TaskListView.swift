@@ -12,16 +12,31 @@ struct TaskListView: View {
     
     @ObservedObject var viewModel: TaskListViewModel
     @State var textFieldValue = ""
-    @State private var showingSheet = false
-
+    
+    @State private var appendedItems: Int = 0
+    @State private var deletedItems: Int = 0
+    
     var body: some View {
-        
         NavigationView {
             GeometryReader { geometry in
                 ScrollView {
                     VStack {
-                        
-                        
+                        // Add field
+                        Group {
+                            HStack {
+                                TextField("New task", text: $textFieldValue)
+                                Button {
+                                    addNewTask()
+                                } label: {
+                                    Text("Add")
+                                }
+                            }
+                            .padding()
+                            .background(.white)
+                        }
+                        .padding(.top)
+                        .padding(.bottom, 5)
+                        .padding(.horizontal)
                         
                         List {
                             ForEach(viewModel.tasks) { task in
@@ -32,45 +47,33 @@ struct TaskListView: View {
                                 }
                             }
                             .onDelete(perform: deleteItems)
+                            .onMove(perform: move)
+                            
                         }
+                        .listStyle(PlainListStyle())
                         .frame(height: geometry.size.height)
+                        .padding(.horizontal)
                         
-                        .sheet(isPresented: $showingSheet) {
-                            VStack {
-                                HStack {
-                                    TextField("New task", text: $textFieldValue)
-                                    Button {
-                                        addNewTask()
-                                        showingSheet.toggle()
-                                    } label: {
-                                        Text("Add")
-                                    }
-                                }
-                                .padding()
-                                .background(.white)
-                            }
-                            .cornerRadius(10)
-                            .padding(.top)
-                            .padding(.horizontal)
-                        }
                         
                         // Navigation bar
                         .navigationTitle("CanDoIt")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                             ToolbarItem(placement: .navigationBarTrailing) {
-                                EditButton()
-                            }
-                            ToolbarItem {
                                 Button {
-                                    showingSheet.toggle()
+                                    // Options
                                 } label: {
-                                    Image(systemName: "plus")
+                                    Image(systemName: "gear")
                                 }
 
                             }
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                EditButton()
+                            }
+                            
                         }
-                    }.background(Color(UIColor.systemGray6))
+                    }
+                    .background(Color(UIColor.systemGray6))
                 }
             }
             
@@ -78,17 +81,33 @@ struct TaskListView: View {
         .onAppear(perform: loadItems)
         .navigationViewStyle(StackNavigationViewStyle()) // Fix problem with constraint warning
     }
+    
     private func addNewTask() {
+        
         if textFieldValue != "" {
-            viewModel.addNewItem(with: textFieldValue)
+            if appendedItems - deletedItems == 0 {
+                viewModel.addNewItem(with: textFieldValue, and: 0 )
+                appendedItems = 0
+                deletedItems = 0
+            } else {
+                viewModel.addNewItem(with: textFieldValue, and: appendedItems + deletedItems )
+            }
             textFieldValue = ""
+            appendedItems += 1
         }
     }
+    
     private func deleteItems(offsets: IndexSet) {
         viewModel.deleteItems(by: offsets)
+        deletedItems += 1
     }
+    
     private func loadItems() {
         viewModel.loadData()
+    }
+    
+    private func move(the source: IndexSet, to destination: Int) {
+        viewModel.move(from: source, to: destination)
     }
 }
 

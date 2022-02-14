@@ -11,11 +11,11 @@ import CoreData
 struct TaskListRowView: View {
     let task: Task
     var body: some View {
-        if let timestamp = task.timestamp, let taskTitle = task.title {
+        if let taskTitle = task.title {
             HStack {
                 Text("\(taskTitle)")
                 Spacer()
-                Text("\(timestamp, formatter: K.dateFormatter)")
+                Text("\(task.order)")
                     .font(.caption)
             }
             .padding(.vertical)
