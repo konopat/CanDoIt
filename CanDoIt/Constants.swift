@@ -10,6 +10,8 @@ import Foundation
 struct K {
     static let entityName = "Task"
     static let persistentContainerName = "DataModel"
+    static let basicSortingKey = "order"
+    static let fallbackSortingKey = "timestamp"
     
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

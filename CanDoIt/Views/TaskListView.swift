@@ -13,15 +13,13 @@ struct TaskListView: View {
     @ObservedObject var viewModel: TaskListViewModel
     @State var textFieldValue = ""
     
-    @State private var appendedItems: Int = 0
-    @State private var deletedItems: Int = 0
-    
     var body: some View {
         NavigationView {
-            GeometryReader { geometry in
-                ScrollView {
+            GeometryReader { geometry in // For dynamic size calculations.
+                ScrollView { // If you want to place something other than a List on this view.
                     VStack {
-                        // Add field
+                        
+                        // MARK: - Add field
                         Group {
                             HStack {
                                 TextField("New task", text: $textFieldValue)
@@ -32,48 +30,56 @@ struct TaskListView: View {
                                 }
                             }
                             .padding()
-                            .background(.white)
+                            .background(.white) // Only for iOS 15 and above
                         }
                         .padding(.top)
                         .padding(.bottom, 5)
                         .padding(.horizontal)
                         
+                        // MARK: - List of items
                         List {
                             ForEach(viewModel.tasks) { task in
-                                NavigationLink {
-                                    Text("There will be an editing View")
-                                } label: {
-                                    TaskListRowView(task: task)
+                                HStack {
+                                    NavigationLink {
+                                        Text("There will be an editing View")
+                                    } label: {
+                                        TaskListRowView(task: task)
+                                    }
+                                }
+                                .onDrag {
+                                    return NSItemProvider()
+                                    // Combination with NSItemProvider() on drag gesture and .OnMove function
+                                    // allows the ability to move tasks by simply grabbing the one you need
+                                    // without activating the edit mode.
                                 }
                             }
                             .onDelete(perform: deleteItems)
-                            .onMove(perform: move)
-                            
+                            .onMove(perform: move) // Paired with a NSItemProvider() activates dragg and drop opportunities.
                         }
-                        .listStyle(PlainListStyle())
-                        .frame(height: geometry.size.height)
+                        .listStyle(PlainListStyle()) // Removes defaults padding.
+                        .frame(height: geometry.size.height) // Required for Scrollview to work properly.
                         .padding(.horizontal)
                         
                         
-                        // Navigation bar
+                        // MARK: - Navigation bar
                         .navigationTitle("CanDoIt")
                         .navigationBarTitleDisplayMode(.inline)
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                Button {
-                                    // Options
-                                } label: {
-                                    Image(systemName: "gear")
-                                }
-
-                            }
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                EditButton()
-                            }
-                            
-                        }
+//                        .toolbar { // Toolbar buttons
+//                            // Leading button
+//                            ToolbarItem(placement: .navigationBarLeading) {
+//                                EditButton()
+//                            }
+//                            // Trailing button
+//                            ToolbarItem(placement: .navigationBarTrailing) {
+//                                Button {
+//                                    // Options
+//                                } label: {
+//                                    Image(systemName: "gear")
+//                                }
+//                            }
+//                        }
                     }
-                    .background(Color(UIColor.systemGray6))
+                    .background(Color(UIColor.systemGray6)) // Only for iOS 15 and above
                 }
             }
             
@@ -83,23 +89,14 @@ struct TaskListView: View {
     }
     
     private func addNewTask() {
-        
         if textFieldValue != "" {
-            if appendedItems - deletedItems == 0 {
-                viewModel.addNewItem(with: textFieldValue, and: 0 )
-                appendedItems = 0
-                deletedItems = 0
-            } else {
-                viewModel.addNewItem(with: textFieldValue, and: appendedItems + deletedItems )
-            }
+            viewModel.addNewItem(with: textFieldValue)
             textFieldValue = ""
-            appendedItems += 1
         }
     }
     
     private func deleteItems(offsets: IndexSet) {
         viewModel.deleteItems(by: offsets)
-        deletedItems += 1
     }
     
     private func loadItems() {
