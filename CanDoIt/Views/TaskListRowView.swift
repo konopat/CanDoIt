@@ -15,8 +15,6 @@ struct TaskListRowView: View {
             HStack {
                 Text("\(taskTitle)")
                 Spacer()
-                Text("\(task.order)")
-                    .font(.caption)
             }
             .padding(.vertical)
         } else {
