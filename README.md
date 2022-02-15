@@ -1,4 +1,4 @@
 # CanDoIt
-SwiftUI CoreData MVVM ToDo app example.
+SwiftUI ToDo app example with drag and drop ability to change an order of tasks. All changes are saved using CoreData. Used MVVM pattern. Tried to comment every step.
 
-I just started working on it.
+
