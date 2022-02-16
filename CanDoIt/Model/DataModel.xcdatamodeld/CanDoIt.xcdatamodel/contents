@@ -8,6 +8,6 @@
         <attribute name="title" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Task" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Task" positionX="-16.283447265625" positionY="-17.22509765625" width="128" height="118"/>
     </elements>
 </model>

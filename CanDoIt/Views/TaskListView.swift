@@ -11,7 +11,12 @@ import CoreData
 struct TaskListView: View {
     
     @ObservedObject var viewModel: TaskListViewModel
+    @FocusState private var focusedField: Field?
     @State var textFieldValue = ""
+    
+    enum Field: Hashable {
+        case textField
+    }
     
     var body: some View {
         NavigationView {
@@ -20,10 +25,13 @@ struct TaskListView: View {
                     VStack {
                         
                         // MARK: - Add field
+                        
                         Group {
                             HStack {
                                 TextField("New task", text: $textFieldValue)
+                                    .focused($focusedField, equals: .textField)
                                 Button {
+                                    focusedField = nil
                                     addNewTask()
                                 } label: {
                                     Text("Add")
@@ -37,13 +45,22 @@ struct TaskListView: View {
                         .padding(.horizontal)
                         
                         // MARK: - List of items
+                        
                         List {
                             ForEach(viewModel.tasks) { task in
                                 HStack {
                                     NavigationLink {
-                                        Text("There will be an editing View")
+                                        TaskEditView(viewModel: viewModel, task: task)
                                     } label: {
-                                        TaskListRowView(task: task)
+                                        if let taskTitle = task.title {
+                                            HStack {
+                                                Text("\(taskTitle)")
+                                                Spacer()
+                                            }
+                                            .padding(.vertical)
+                                        } else {
+                                            Text("Invalid task")
+                                        }
                                     }
                                 }
                                 .onDrag {
@@ -62,22 +79,9 @@ struct TaskListView: View {
                         
                         
                         // MARK: - Navigation bar
+                        
                         .navigationTitle("CanDoIt")
                         .navigationBarTitleDisplayMode(.inline)
-//                        .toolbar { // Toolbar buttons
-//                            // Leading button
-//                            ToolbarItem(placement: .navigationBarLeading) {
-//                                EditButton()
-//                            }
-//                            // Trailing button
-//                            ToolbarItem(placement: .navigationBarTrailing) {
-//                                Button {
-//                                    // Options
-//                                } label: {
-//                                    Image(systemName: "gear")
-//                                }
-//                            }
-//                        }
                     }
                     .background(Color(UIColor.systemGray6)) // Only for iOS 15 and above
                 }
@@ -87,6 +91,8 @@ struct TaskListView: View {
         .onAppear(perform: loadItems)
         .navigationViewStyle(StackNavigationViewStyle()) // Fix problem with constraint warning
     }
+    
+    // MARK: - Functions
     
     private func addNewTask() {
         if textFieldValue != "" {
@@ -107,6 +113,8 @@ struct TaskListView: View {
         viewModel.move(from: source, to: destination)
     }
 }
+
+// MARK: - Preview
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

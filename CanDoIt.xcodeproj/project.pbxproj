@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6F2650F627B65F0000CA407B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2650F527B65F0000CA407B /* Constants.swift */; };
-		6F2650F827B667AB00CA407B /* TaskListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2650F727B667AB00CA407B /* TaskListRowView.swift */; };
 		6F6DADAA27B78BD30096F984 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6F6DADA927B78BD30096F984 /* .gitignore */; };
 		6FB3ECF427B3B98600D9A0A6 /* CanDoItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3ECF327B3B98600D9A0A6 /* CanDoItApp.swift */; };
 		6FB3ECF627B3B98600D9A0A6 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3ECF527B3B98600D9A0A6 /* TaskListView.swift */; };
@@ -17,11 +16,11 @@
 		6FB3ECFD27B3B98700D9A0A6 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3ECFC27B3B98700D9A0A6 /* PersistenceController.swift */; };
 		6FB3ED0027B3B98700D9A0A6 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3ECFE27B3B98700D9A0A6 /* DataModel.xcdatamodeld */; };
 		6FB3ED0727B3BA8A00D9A0A6 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3ED0627B3BA8A00D9A0A6 /* TaskListViewModel.swift */; };
+		6FBFA20427BCB18900A409BB /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBFA20327BCB18900A409BB /* TaskEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6F2650F527B65F0000CA407B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		6F2650F727B667AB00CA407B /* TaskListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRowView.swift; sourceTree = "<group>"; };
 		6F6DADA927B78BD30096F984 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		6FB3ECF027B3B98600D9A0A6 /* CanDoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanDoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB3ECF327B3B98600D9A0A6 /* CanDoItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanDoItApp.swift; sourceTree = "<group>"; };
@@ -31,6 +30,7 @@
 		6FB3ECFC27B3B98700D9A0A6 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		6FB3ECFF27B3B98700D9A0A6 /* CanDoIt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CanDoIt.xcdatamodel; sourceTree = "<group>"; };
 		6FB3ED0627B3BA8A00D9A0A6 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
+		6FBFA20327BCB18900A409BB /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 			isa = PBXGroup;
 			children = (
 				6FB3ECF527B3B98600D9A0A6 /* TaskListView.swift */,
-				6F2650F727B667AB00CA407B /* TaskListRowView.swift */,
+				6FBFA20327BCB18900A409BB /* TaskEditView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -181,9 +181,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FB3ECFD27B3B98700D9A0A6 /* PersistenceController.swift in Sources */,
+				6FBFA20427BCB18900A409BB /* TaskEditView.swift in Sources */,
 				6FB3ED0727B3BA8A00D9A0A6 /* TaskListViewModel.swift in Sources */,
 				6FB3ECF627B3B98600D9A0A6 /* TaskListView.swift in Sources */,
-				6F2650F827B667AB00CA407B /* TaskListRowView.swift in Sources */,
 				6FB3ED0027B3B98700D9A0A6 /* DataModel.xcdatamodeld in Sources */,
 				6FB3ECF427B3B98600D9A0A6 /* CanDoItApp.swift in Sources */,
 				6F2650F627B65F0000CA407B /* Constants.swift in Sources */,
