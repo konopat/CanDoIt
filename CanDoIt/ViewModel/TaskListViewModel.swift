@@ -65,7 +65,7 @@ class TaskListViewModel: ObservableObject {
     }
 
     // MARK: - New data
-    func addNewItem(with title: String) {
+    func addNewItem(with title: String, and note: String = "") {
         
         // Initializing the creation of a new entity
         let newItem = EntityModel(context: persistenceController.container.viewContext)
@@ -75,6 +75,7 @@ class TaskListViewModel: ObservableObject {
         newItem.isDone = false
         newItem.title = title
         newItem.timestamp = Date()
+        newItem.note = note
         newItem.order = 0 // By default is zero unless an user wants to change the sort.
         
         // And start saving

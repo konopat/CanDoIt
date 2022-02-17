@@ -10,34 +10,61 @@ import SwiftUI
 struct TaskEditView: View {
     
     @ObservedObject var viewModel: TaskListViewModel // Need for save changes
-    @State var textEditorValue = ""
-    let task: Task
+    @State var textFieldValue = "" // task.title
+    @State var textEditorValue = "" // task.note
+    @State var notePlaceholder = "You can type a new note here"
+    
+    let task: Task // The view waiting a task
     
     var body: some View {
         VStack {
-            Group {
-                HStack {
-                    TextEditor(text: $textEditorValue)
-                        .font(.title2)
-                        .onDisappear(perform: saveData)
-                }
-            }
-            Spacer()
+            titleEditor
+            noteEditor
         }
         .padding()
         .onAppear(perform: getTitleValue) // Get current task title
+    }
+    
+    
+    // MARK: - Subviews
+    
+    // TitleEditorView
+    var titleEditor: some View {
+        TextField("New task", text: $textFieldValue)
+            .font(.title)
+            .onDisappear(perform: saveData)
+    }
+    
+    // NoteEditorView
+    var noteEditor: some View {
+        ZStack {
+            if textEditorValue == "" {
+                TextEditor(text: $notePlaceholder)
+                        .font(.title2)
+                        .foregroundColor(.gray)
+                        .disabled(true)
+            }
+            TextEditor(text: $textEditorValue)
+                .font(.title2)
+                .opacity(textEditorValue == "" ? 0.25 : 1)
+                .onDisappear(perform: saveData)
+        }
     }
     
     // MARK: - Functions
     
     private func getTitleValue() {
         if let taskTitle = task.title {
-            textEditorValue = taskTitle
+            textFieldValue = taskTitle
+            if let taskNote = task.note {
+                textEditorValue = taskNote
+            }
         }
     }
     
     private func saveData() {
-        task.title = textEditorValue
+        task.title = textFieldValue
+        task.note = textEditorValue
         viewModel.saveData()
     }
 }
